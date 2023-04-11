@@ -1,0 +1,36 @@
+<div mat-dialog-title class="title"></div>
+    <h1 >Formulario de Cuenta</h1>
+<div mat-dialog-content class="content">
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Numero de cuenta</mat-label>
+            <input matInput type="number" placeholder="ej. 960010101">
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline">
+            <mat-label>Banco</mat-label>
+            <mat-select>
+              <mat-option value="Banreservas ">Banreservas</mat-option>
+              <mat-option value="Banco Popular ">Banco Popular</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div class="row">
+     
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo De Cuenta</mat-label>
+            <mat-select>
+              <mat-option value="Ahorro">Ahorro</mat-option>
+              <mat-option value="Corriente">Corriente</mat-option>
+              <mat-option value="Nomina">Nomina</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+   
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button>Cancelar</button>
+    <button mat-raised-button color="primary">Guardar</button>
+</div>
