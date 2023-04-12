@@ -13,15 +13,18 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import { AddAccountComponent } from './add-account/add-account.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { CheckEditAccountComponent } from './check-edit-account/check-edit-account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddAccountComponent
+    AddAccountComponent,
+    CheckEditAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,10 @@ import { MatSortModule } from '@angular/material/sort';
     ReactiveFormsModule,
     HttpClientModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatSlideToggleModule,
+    FormsModule
+    
 
   ],
   providers: [],

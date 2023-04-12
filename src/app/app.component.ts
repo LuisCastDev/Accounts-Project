@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { AddAccountComponent } from './add-account/add-account.component';
+import { CheckEditAccountComponent } from "./check-edit-account/check-edit-account.component";
 import { AccountService } from './services/account.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -36,9 +37,17 @@ export class AppComponent implements OnInit {
 
 
   openAddAccountForm(){
-  this._dialog.open(AddAccountComponent);
-
+  const dialogRef =this._dialog.open(AddAccountComponent);
+    dialogRef.afterClosed().subscribe({
+      next: (val)=>{
+        if(val){
+          this.getAccountList()
+        }
+      }
+    })
   }
+
+  
 
   getAccountList(){
     this._accountService.getAccountList().subscribe({
@@ -75,4 +84,16 @@ export class AppComponent implements OnInit {
       }
     })
   }
+
+  getAccountForm(data: any){
+    console.log(data,'esta es la data que recibo')
+  this._dialog.open(CheckEditAccountComponent,{
+    data,});
+     
+  }
+
+  getStatus(value : true){
+    return value === true? 'activa' : 'inactiva'
+  }
+  
 }

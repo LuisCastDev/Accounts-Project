@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccountService } from '../services/account.service';
-import { DialogRef } from '@angular/cdk/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 @Component({
   selector: 'app-add-account',
   templateUrl: './add-account.component.html',
   styleUrls: ['./add-account.component.scss']
 })
-export class AddAccountComponent {
+export class AddAccountComponent implements OnInit {
 
   accountForm: FormGroup;
 
@@ -28,7 +31,8 @@ export class AddAccountComponent {
   constructor(
     private _fb : FormBuilder, 
     private _accountService : AccountService,
-    private _dialogRef : DialogRef<AddAccountComponent>
+    private _dialogRef : MatDialogRef<AddAccountComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: any
     ){
     this.accountForm = this._fb.group({
       accountNumber: '',
@@ -37,6 +41,9 @@ export class AddAccountComponent {
       isActive: true,
       transactions: null
     })
+  }
+  ngOnInit(): void {
+    this.accountForm.patchValue(this.data)
   }
   onFormSubmit(){
     if (this.accountForm.valid){
@@ -53,7 +60,7 @@ export class AddAccountComponent {
       this._accountService.createAccount(newAccountData).subscribe({
         next: (val: any)=>{
           alert('Cuenta creada correctamente');
-          this._dialogRef.close();
+          this._dialogRef.close(true);
         },
         error: (err: any) => {
           console.error(err)

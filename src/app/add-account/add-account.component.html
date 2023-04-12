@@ -17,13 +17,13 @@
           <mat-form-field appearance="outline">
             <mat-label>Tipo De Cuenta</mat-label>
             <mat-select formControlName="accountType">
-              <mat-option *ngFor="let accountType of accountTypes" [value]="accountType" >{{accountType}}</mat-option>
+              <mat-option *ngFor="let accountType of accountTypes" [value]="accountType" required >{{accountType}}</mat-option>
           
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Numero de cuenta</mat-label>
-            <input matInput type="text" placeholder="ej. 960010101" formControlName="accountNumber">
+            <input matInput type="text" placeholder="ej. 960010101" formControlName="accountNumber" required minlength="5" maxlength="15">
           </mat-form-field>
     
     </div>

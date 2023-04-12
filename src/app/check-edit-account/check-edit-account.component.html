@@ -1,0 +1,91 @@
+<div mat-dialog-title class="title"></div>
+    <h1 >Historial de cuenta</h1>
+<form [formGroup]="accountForm">
+    <div mat-dialog-content class="content">
+    <div class="row">
+    
+          <mat-form-field appearance="outline">
+            <mat-label>Numero de cuenta</mat-label>
+            <input matInput type="text" formControlName="number" [readonly]="true">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Balance actual</mat-label>
+            <input matInput type="number"  [readonly]="true" [value]="balance">
+          </mat-form-field>
+    </div>
+    <div class="row">
+     
+          <mat-form-field appearance="outline">
+            <mat-label>Descripcion</mat-label>
+            <input matInput type="text" [readonly]="true" formControlName="description">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Cantidad</mat-label>
+            <input matInput type="number"  [(ngModel)]="amt" [ngModelOptions]="{standalone: true}"  />
+          </mat-form-field>
+   
+    </div>
+    <div class="row">
+     
+     
+
+</div>
+   
+
+</div>
+
+<div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="accountId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.accountId}} </td>
+      </ng-container>
+  
+      <!-- Date Column -->
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+        <td mat-cell *matCellDef="let row" >{{row.date}} </td>
+      </ng-container>
+  
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+        <td mat-cell *matCellDef="let row"> {{getType(row.transactionType)}} </td>
+      </ng-container>
+  
+      <!-- Status Column -->
+      <ng-container matColumnDef="isActive">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+        <td mat-cell *matCellDef="let row"> {{getStatus(row.isActive)}} </td>
+      </ng-container>
+      <!-- amount Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+        <td mat-cell *matCellDef="let row">  
+           
+          {{row.amount}}
+          
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+          
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5,10 ]" aria-label="Select page of users"></mat-paginator>
+  </div>
+  
+
+
+
+</form>
+<div mat-dialog-actions class="action">
+    <button mat-raised-button color="warn" (click)="makeWithdrawal(data.accountId,this.amt)" >Retirar</button>
+    <button mat-raised-button color="primary" (click)="makeDeposit(data.accountId,this.amt)">Depositar</button>
+</div>
